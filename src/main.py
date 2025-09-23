@@ -15,6 +15,8 @@ def main():
     rdd_a = df_a.rdd
     rdd_b = df_b.rdd
 
+    ### Dataset A ###
+
     # Rm duplicates
     unique_rdd = rm_duplicates(rdd_a)
 
@@ -38,15 +40,17 @@ def main():
     # Group by loc, get top X items
     grouped_rdd = group_and_get_top_items(location_items_rdd, TOP_X)
 
+    ### Dataset B ###
+
     #// Broadcast loc names
     input_locations_rdd = rdd_b
 
     # Convert each row to (location_oid, location_name)
-    # E.g. (100, "Car")
+    # E.g. {(100, "onenorth"), (101, "mediapolis")}
     pairs_rdd = input_locations_rdd.map(map_location_dict)
 
-    # Convert into python dict {}
-    # E.g. {100:"Car", 101:"Lorry"}
+    # Convert into python dict{}
+    # E.g. {(100:"onenorth", 101:"mediapolis"}
     loc_dict = dict(pairs_rdd.collect())
 
     # Broadcast dict{}

@@ -1,0 +1,11 @@
+# Cache files
+__pycache__/
+*.pyc
+
+# Logs / temp files
+*.log
+*.tmp
+
+# Spark output dirs
+*.parquet/
+
